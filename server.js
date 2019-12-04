@@ -105,7 +105,6 @@ app.get("/patient/:id", (req, res) => {
 
 app.post("/patient/create", (req, res) => {
   console.log("test patient add");
-
   const data = new PatientDetails(req.body);
   console.log("data: ", data);
   data.save((err, dbres) => {
@@ -120,14 +119,14 @@ app.post("/patient/update/:id", (req, res) => {
   let updateInfo = req.body;
   PatientDetails.findByIdAndUpdate(id, updateInfo, (err, dbres) => {
     if (err) return res.status(404).send({ error: err.message });
-    return res.send({ message: "Service is successfully updated", dbres });
+    return res.send({ message: "Patient is successfully updated", dbres });
   });
 });
 
 app.post("/patient/delete/:id", (req, res) => {
   PatientDetails.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) return res.status(404).send({ error: err.message });
-    return res.send({ message: "Service is successfully deleted!", data });
+    return res.send({ message: "Patient is successfully deleted!", data });
   });
 });
 
@@ -150,6 +149,15 @@ app.post("/record/create", (req, res) => {
   data.save((err, dbres) => {
     if (err) return res.status(404).send({ message: err.message });
     return res.send({ dbres });
+  });
+});
+
+app.post("/record/update/:id", (req, res) => {
+  let id = req.params.id;
+  let updateInfo = req.body;
+  PatientDetails.findByIdAndUpdate(id, updateInfo, (err, dbres) => {
+    if (err) return res.status(404).send({ error: err.message });
+    return res.send({ message: "Record is successfully updated", dbres });
   });
 });
 
