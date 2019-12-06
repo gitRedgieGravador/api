@@ -155,7 +155,8 @@ app.post("/record/create", (req, res) => {
 app.post("/record/update/:id", (req, res) => {
   let id = req.params.id;
   let updateInfo = req.body;
-  PatientDetails.findByIdAndUpdate(id, updateInfo, (err, dbres) => {
+  console.log(updateInfo)
+  MedicalRecords.findByIdAndUpdate(id, updateInfo, (err, dbres) => {
     if (err) return res.status(404).send({ error: err.message });
     return res.send({ message: "Record is successfully updated", dbres });
   });
